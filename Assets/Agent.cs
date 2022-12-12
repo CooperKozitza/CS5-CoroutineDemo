@@ -27,7 +27,7 @@ public class Agent : MonoBehaviour
 
         while (true)
         {
-            transform.position = Vector3.MoveTowards(target.position, path[targetIndex], speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, path[targetIndex], speed * Time.deltaTime);
             if (transform.position == path[targetIndex])
             {
                 targetIndex = (targetIndex + 1) % path.Length;
