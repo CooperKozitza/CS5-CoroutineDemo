@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Agent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Range(0, 10)]
+    public float speed = 1.0f;
+    public Transform pathParent;
+
+    void Awake()
     {
-        
+        Vector3[] path = new Vector3[pathParent.childCount];
+        for (int i = 0; i < pathParent.childCount; i++)
+        {
+            path[i] = transform.GetChild(i).transform.position;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void OnDrawGizmos() {
+		Vector3 startPosition = pathParent.GetChild(0).position;
+		Vector3 previousPosition = startPosition;
+
+		foreach (Transform waypoint in pathParent) {
+			Gizmos.DrawSphere (waypoint.position, .3f);
+			Gizmos.DrawLine (previousPosition, waypoint.position);
+			previousPosition = waypoint.position;
+		}
+		Gizmos.DrawLine (previousPosition, startPosition);
+	}
 }
