@@ -13,7 +13,7 @@ public class Agent : MonoBehaviour
     void Awake()
     {
         path = new Vector3[pathParent.childCount];
-        for (int i = 0; i < pathParent.childCount; i++)
+        for (int i = 0; i < path.Length; i++)
         {
             path[i] = transform.GetChild(i).transform.position;
         }
@@ -32,6 +32,7 @@ public class Agent : MonoBehaviour
             {
                 targetIndex = (targetIndex + 1) % path.Length;
             }
+            yield return null;
         }
     }
 
