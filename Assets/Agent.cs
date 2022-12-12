@@ -8,12 +8,30 @@ public class Agent : MonoBehaviour
     public float speed = 1.0f;
     public Transform pathParent;
 
+    private Vector3[] path { get; set; }
+
     void Awake()
     {
-        Vector3[] path = new Vector3[pathParent.childCount];
+        path = new Vector3[pathParent.childCount];
         for (int i = 0; i < pathParent.childCount; i++)
         {
             path[i] = transform.GetChild(i).transform.position;
+        }
+
+        StartCoroutine(followPath());
+    }
+
+    private IEnumerator followPath()
+    {
+        int targetIndex = 0;
+
+        while (true)
+        {
+            transform.position = Vector3.MoveTowards(target.position, path[targetIndex], speed * Time.deltaTime);
+            if (transform.position == path[targetIndex])
+            {
+                targetIndex = (targetIndex + 1) % path.Length;
+            }
         }
     }
 
