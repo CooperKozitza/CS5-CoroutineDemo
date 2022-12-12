@@ -15,7 +15,7 @@ public class Agent : MonoBehaviour
         path = new Vector3[pathParent.childCount];
         for (int i = 0; i < path.Length; i++)
         {
-            path[i] = transform.GetChild(i).transform.position;
+            path[i] = transform.GetChild(i).position;
         }
 
         StartCoroutine(followPath());
