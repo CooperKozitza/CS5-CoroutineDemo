@@ -18,10 +18,10 @@ public class Agent : MonoBehaviour
             path[i] = pathParent.GetChild(i).position;
         }
 
-        StartCoroutine(followPath());
+        StartCoroutine(FollowPath());
     }
 
-    private IEnumerator followPath()
+    private IEnumerator FollowPath()
     {
         int targetIndex = 0;
 
@@ -45,6 +45,7 @@ public class Agent : MonoBehaviour
 			Gizmos.DrawLine (previousPosition, waypoint.position);
 			previousPosition = waypoint.position;
 		}
+
 		Gizmos.DrawLine (previousPosition, startPosition);
 	}
 }
